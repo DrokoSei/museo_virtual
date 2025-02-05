@@ -1,41 +1,149 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>            
+<head>
     <meta charset="UTF-8">
-    <title>Museo Virtual</title>
-    <style>            
-        .galeria {            
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Museo Virtual de Florencia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos generales */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f4f4f4;
+        }
+
+        /* Encabezado */
+        .header {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1581579186913-45ac24ed53d2');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        /* Galería */
+        .galeria {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 20px;
+            padding: 50px 20px;
         }
-        .imagen-museo {            
+
+        .imagen-museo {
             width: 300px;
-            height: 200px;
+            height: 400px;
             object-fit: cover;
             border-radius: 10px;
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
+
         .imagen-museo:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
-    </style>            
-</head>            
-<body>            
-    <div class="galeria">
-        <!-- Imágenes con URLs directas -->
-        <img src="https://images.unsplash.com/photo-1581579186913-45ac24ed53d2" 
-             alt="Museo de Florencia" 
-             class="imagen-museo">            
-        
-        <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9" 
-             alt="Interior de Museo" 
-             class="imagen-museo">            
-        
-        <img src="https://images.unsplash.com/photo-1592409487440-d5a5574a3b1f" 
-             alt="Galería de Arte" 
-             class="imagen-museo">      
-    </div>      
-</body>      
-</html>      
+
+        /* Botones */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #e74c3c;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #c0392b;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+        }
+
+        .modal-content {
+            margin: 10% auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Encabezado -->
+    <div class="header">
+        <h1>Museo Virtual de Florencia</h1>
+        <p>Sumérgete en una experiencia única de arte y cultura. Explora las obras maestras del Renacimiento desde la comodidad de tu hogar.</p>
+        <a href="#galeria" class="btn">Explorar Galería</a>
+    </div>
+
+    <!-- Galería -->
+    <div id="galeria" class="galeria">
+        <!-- Imágenes a reemplazar -->
+        <img src="img/museo1.jpg" alt="Museo 1" class="imagen-museo" onclick="abrirModal(this)">
+        <img src="img/museo2.jpg" alt="Museo 2" class="imagen-museo" onclick="abrirModal(this)">
+        <img src="img/museo3.jpg" alt="Museo 3" class="imagen-museo" onclick="abrirModal(this)">
+        <img src="img/museo4.jpg" alt="Museo 4" class="imagen-museo" onclick="abrirModal(this)">
+        <img src="img/museo5.jpg" alt="Museo 5" class="imagen-museo" onclick="abrirModal(this)">
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal" onclick="cerrarModal()">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modal-imagen">
+    </div>
+
+    <script>
+        function abrirModal(imagen) {
+            var modal = document.getElementById("modal");
+            var modalImg = document.getElementById("modal-imagen");
+            modal.style.display = "block";
+            modalImg.src = imagen.src;
+        }
+
+        function cerrarModal() {
+            var modal = document.getElementById("modal");
+            modal.style.display = "none";
+        }
+    </script>
+</body>
+</html>
